@@ -11,16 +11,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
         with:
-          workdir: .
-          buildozer_version: master
+          command: buildozer android debug
+          subfolder: .
 
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: package
           path: bin/*.apk
